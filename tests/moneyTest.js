@@ -22,3 +22,11 @@ if (formatCurrency(2000.5) === '20.01') {
 } else {
     console.log('failed');
 }
+
+it('rounds down to the nearest cent', () => {
+    expect(formatCurrency(2000.5)).toEqual('20.00');
+});
+
+it('Works with negative numbers', () => {
+    expect(formatCurrency(-500)).toEqual('-5.00');
+});
