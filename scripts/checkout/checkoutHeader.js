@@ -26,6 +26,14 @@ export function renderCheckoutHeader() {
         </div>  
         
     `;
+        
+    const quantityElement = document.querySelector('.js-cart-quantity');
+    if (quantityElement) {
+        quantityElement.innerHTML = `${cartQuantity} items`;
+    }
 
-    document.querySelector('.js-checkout-header').innerHTML = checkoutHeaderHTML;
+    const headerElement = document.querySelector('.js-checkout-header');
+    if (headerElement) {
+        headerElement.innerHTML = checkoutHeaderHTML;
+    }
 }
