@@ -34,7 +34,9 @@ let productsHTML = '';
               `<option value="${i + 1}" ${i === 0 ? 'selected' : ''}>${i + 1}</option>`).join('')}
           </select>
         </div>
-  
+
+        ${product.extraInfoHTML()} 
+              
         <div class="product-spacer"></div>
   
         <div class="added-to-cart">
@@ -47,7 +49,7 @@ let productsHTML = '';
           Add to Cart
         </button>
       </div>
-    `;
+    `; // Polymorphism : product.extraInfoHTML- means use a method without knowing the class
   });
 
   

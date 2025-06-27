@@ -34,6 +34,27 @@ export function getProduct(productId) {
     getPrice() {
       return `$${formatCurrency(this.priceCents)}`;
     }
+
+    extraInfoHTML() {
+      return '';
+    }
+  }
+
+  class Clothing extends Product{ //Inheritance : lets us reuse code between clsses, 
+  // used when we've one class is a more specific type of parent/main class that's why we extends and called as child class.
+    sizeChartLink;
+
+    constructor(productDetails){
+      super(productDetails);
+      this.sizeChartLink= productDetails.sizeChartLink;
+    }
+
+    extraInfoHTML() { // Method overriding
+      //super.extraInfoHTML();
+      return `
+        <a href="${this.sizeChartLink}" target="_blank">Size Chart</a>
+      `;
+    }
   }
   
 export const products = [
@@ -696,5 +717,8 @@ export const products = [
     ]
   }
 ].map((productDetails) => {
+  if(productDetails.type === 'clothing') {
+    return new Clothing(productDetails);
+  }
   return new Product(productDetails);
 });
