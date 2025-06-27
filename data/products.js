@@ -20,6 +20,8 @@ export function getProduct(productId) {
     priceCents;
 
     constructor(productDetails) {
+      // this - it lets an object() to access its own properties of its class,
+      // But in js it can be used anywhere in our code
       this.id = productDetails.id;
       this.image = productDetails.image;
       this.name = productDetails.name;
@@ -56,7 +58,33 @@ export function getProduct(productId) {
       `;
     }
   }
-  
+
+  /*
+  const date = new Date();
+  console.log(date);
+  console.log(date.toLocaleTimeString());
+  */
+
+  // console.log(this); // undefined
+
+  /* this keyword also used to create a new object
+  const obj = {
+    a: 2,
+    b: this.a
+  } */
+
+    // function logThis() {
+    //   console.log(this); // Inside the fun, we can change 'this' to any value
+    // } // it will replace this to passed value
+    // logThis.call('hello');
+
+    // const obj2 = { // inside a method, 'this' points to outer object and inside fun, it is undefined
+    //   method: () => { // arrow function do not change the value of 'this'.
+    //     console.log(this);
+    //   }
+    // }
+    // obj2.method(); // undefined
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
