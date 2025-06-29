@@ -95,3 +95,15 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
 
       saveToStorage();
 }
+
+export function loadCart(fun) { // Callback - a function to run in future. ex - setTimeout
+      const xhr = new XMLHttpRequest();
+
+      xhr.addEventListener('load', () => { // json.parse converts js into object/array
+        console.log(xhr.response);
+        fun();
+      });
+
+      xhr.open('GET', 'https://supersimplebackend.dev/cart');
+      xhr.send();
+    }
