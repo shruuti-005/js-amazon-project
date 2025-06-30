@@ -1,6 +1,6 @@
 import { renderOrderSummary } from "./checkout/orderSummary.js";
 import { renderPaymentSummary } from "./checkout/paymentSummary.js";
-import { loadProducts } from "../data/products.js";
+import { loadProducts, loadProductsFetch } from "../data/products.js";
 import { Car } from "../data/car.js";
 import { loadCart } from "../data/cart.js";
 //import '../data/cart-class.js';
@@ -12,12 +12,11 @@ import { loadCart } from "../data/cart.js";
 // Promise Let us wait fore some code to finish, before going to the next step
 
 Promise.all([
-    new Promise((resolve) => { // it is a built in class - runs inner function immediately, Don’t go to the next step until I call resolve()
-        loadProducts(() => { // this ensure products are loaded first from backend, waiting to finsish loading
-            resolve('value1'); // resolve is a function lets us control when to go to next step
-        });
+     // promise is a built in class - runs inner function immediately, Don’t go to the next step until I call resolve()
+     // this ensure products are loaded first from backend, waiting to finsish loading
+     // resolve is a function lets us control when to go to next step
 
-    }),
+    loadProductsFetch(),
     new Promise((resolve) => {
         loadCart(() => {
             resolve();

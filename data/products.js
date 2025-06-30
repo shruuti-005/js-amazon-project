@@ -108,6 +108,34 @@ export function getProduct(productId) {
 
     export let products = [];
 
+    export function loadProductsFetch() {
+      //Makes an http request (bydefault GET request), it uses a promise
+      const promise = fetch(
+        'https://supersimplebackend.dev/products'
+      ).then((response) => {
+          return response.json(); // product data
+      }).then((productsData) => {
+        products = productsData.map((productDetails) => {
+          if(productDetails.type === 'clothing') {
+            return new Clothing(productDetails);
+          } else if(productDetails.type === 'appliance') {
+            return new Appliance(productDetails);
+          }
+          return new Product(productDetails);
+        });
+
+        console.log('load products');
+        
+      });
+
+      return promise;
+    }
+
+    /*
+    loadProductsFetch().then(() => {
+      console.log('next step');
+    });
+    */
     export function loadProducts(fun) { // Callback - a function to run in future. ex - setTimeout
       const xhr = new XMLHttpRequest();
 
