@@ -15,14 +15,25 @@ async function loadPage() {  // async-await : shortcut for promises
     // async - makes a function return a promise
     // await - lets us wait for a promise to finish, before going to the next line
 
-    await loadProductsFetch();
+    // Error handling: try/catch we don't use everywhere, it's meant to handle unexpected errors
+    // (Which means code is correct but, error occurred outside our control)
+    try { // we can use try / catch with synchronous code (or normal code)
 
-    await new Promise((resolve) => {
-        loadCart(() => {
-            resolve();
+        //throw 'error1'; // throw creates error mannually
+        await loadProductsFetch();
+
+        const value = await new Promise((resolve, reject) => {
+            // throw 'error2';
+            loadCart(() => {
+                //reject('error3'); // reject - lets us create an error in the future
+                resolve();
+            });
         });
-    })
 
+    } catch(error) {
+        console.log('Unexpected error. Please try again later.')
+    }
+    
     renderOrderSummary();
     renderPaymentSummary();
 
