@@ -11,6 +11,27 @@ import { loadCart } from "../data/cart.js";
 // Similar to done() function
 // Promise Let us wait fore some code to finish, before going to the next step
 
+async function loadPage() {  // async-await : shortcut for promises
+    // async - makes a function return a promise
+    // await - lets us wait for a promise to finish, before going to the next line
+
+    await loadProductsFetch();
+
+    await new Promise((resolve) => {
+        loadCart(() => {
+            resolve();
+        });
+    })
+
+    renderOrderSummary();
+    renderPaymentSummary();
+
+    return 'value2' // resolve('value2')
+}
+loadPage();
+
+/*
+
 Promise.all([
      // promise is a built in class - runs inner function immediately, Don’t go to the next step until I call resolve()
      // this ensure products are loaded first from backend, waiting to finsish loading
@@ -28,6 +49,8 @@ Promise.all([
     renderOrderSummary();
     renderPaymentSummary();
 });
+
+*/
 
 /*
 new Promise((resolve) => { // it is a built in class - runs inner function immediately, Don’t go to the next step until I call resolve()
