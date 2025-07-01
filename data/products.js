@@ -108,30 +108,25 @@ export function getProduct(productId) {
 
     export let products = [];
 
-    export function loadProductsFetch() {
-      //Makes an http request (bydefault GET request), it uses a promise
-      const promise = fetch(
-        'https://supersimplebackend.dev/products'
-      ).then((response) => {
-          return response.json(); // product data
-      }).then((productsData) => {
-        products = productsData.map((productDetails) => {
-          if(productDetails.type === 'clothing') {
-            return new Clothing(productDetails);
-          } else if(productDetails.type === 'appliance') {
-            return new Appliance(productDetails);
-          }
-          return new Product(productDetails);
-        });
+    export async function loadProductsFetch() {
+  try {
+    const response = await fetch('https://supersimplebackend.dev/products');
+    const productsData = await response.json();
 
-        console.log('load products');
-        
-      }).catch((error) => {
-        console.log('Unexpected error. Please try again later.');
-      });
+    products = productsData.map((productDetails) => {
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails);
+      } else if (productDetails.type === 'appliance') {
+        return new Appliance(productDetails);
+      }
+      return new Product(productDetails);
+    });
 
-      return promise;
-    }
+    console.log('load products');
+  } catch (error) {
+    console.log('Unexpected error. Please try again later.');
+  }
+}
 
 
     /*

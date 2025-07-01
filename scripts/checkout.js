@@ -2,7 +2,7 @@ import { renderOrderSummary } from "./checkout/orderSummary.js";
 import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 import { loadProducts, loadProductsFetch } from "../data/products.js";
 import { Car } from "../data/car.js";
-import { loadCart } from "../data/cart.js";
+import { loadCart, loadCartFetch } from "../data/cart.js";
 //import '../data/cart-class.js';
 // import '../data/backend-practice.js'
 
@@ -19,16 +19,19 @@ async function loadPage() {  // async-await : shortcut for promises
     // (Which means code is correct but, error occurred outside our control)
     try { // we can use try / catch with synchronous code (or normal code)
 
+        await Promise.all([
+            loadProductsFetch(),
+            loadCartFetch()
+        ]);
         //throw 'error1'; // throw creates error mannually
-        await loadProductsFetch();
-
-        const value = await new Promise((resolve, reject) => {
-            // throw 'error2';
-            loadCart(() => {
-                //reject('error3'); // reject - lets us create an error in the future
-                resolve();
-            });
-        });
+        
+        // const value = await new Promise((resolve, reject) => {
+        //     // throw 'error2';
+        //     loadCart(() => {
+        //         //reject('error3'); // reject - lets us create an error in the future
+        //         resolve();
+        //     });
+        // });
 
     } catch(error) {
         console.log('Unexpected error. Please try again later.')
