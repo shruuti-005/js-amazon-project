@@ -27,7 +27,7 @@ This project is a hands-on implementation of essential JavaScript concepts It co
 
 ## 🌐 Live Demo
 
-🔗 [View on GitHub Pages](https://shruuti-005.github.io/js-amazon-project/)
+🔗 https://shruuti-005.github.io/js-amazon-project/
 
 ## 🤝 Contribution & License
 
